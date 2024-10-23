@@ -36,4 +36,5 @@ jobs:
           RENOVATE_AUTODISCOVER_FILTER: "['GlueOps/*']" 
           RENOVATE_REQUIRE_CONFIG: "ignored"
           RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"extends": ["github>GlueOps/renovatebot-configs//defaults#v0.0.2"]}'
+          RENOVATE_IGNORE_PR_AUTHOR: "true"
           
