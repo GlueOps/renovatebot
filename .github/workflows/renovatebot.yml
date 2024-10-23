@@ -24,3 +24,13 @@ jobs:
         uses: renovatebot/github-action@v40.3.4
         with:
           token: '${{ steps.get_token.outputs.token }}'
+        env:
+          RENOVATE_PLATFORM: "github"
+          RENOVATE_AUTODISCOVER: "true"
+          RENOVATE_ALLOW_PLUGINS: "true"
+          LOG_LEVEL: "INFO"
+          RENOVATE_DRY_RUN: "full"
+          RENOVATE_AUTODISCOVER_FILTER: "['GlueOps/*']"
+          RENOVATE_REQUIRE_CONFIG: "ignored"
+          RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"extends": ["github>GlueOps/renovatebot-configs//defaults#v0.0.2"]}'
+          
