@@ -33,9 +33,9 @@ jobs:
           RENOVATE_ALLOW_PLUGINS: "true"
           LOG_LEVEL: "INFO"
           RENOVATE_DRY_RUN: "null"  #set to "full" for dryrun and "null" to apply
-          RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/*']" 
+          RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/terraform-module-cloud-aws-kubernetes-cluster']" 
           RENOVATE_REQUIRE_CONFIG: "ignored"
-          RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"extends": ["github>GlueOps/renovatebot-configs//defaults#eks"]}'
+          RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"extends": ["github>GlueOps/renovatebot-configs//defaults"]}'
           RENOVATE_IGNORE_PR_AUTHOR: "true"
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
