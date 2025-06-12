@@ -27,6 +27,7 @@ jobs:
         uses: renovatebot/github-action@8058cfe11252651a837a58e2e3370fbc0e72c658 # v42.0.4
         with:
           token: '${{ steps.get_token.outputs.token }}'
+          env-regex: "^(?:RENOVATE_\\w+|AWS_SECRET_ACCESS_KEY|AWS_ACCESS_KEY_ID|AWS_REGION)$"
         env:
           RENOVATE_PLATFORM: "github"
           RENOVATE_AUTODISCOVER: "true"
