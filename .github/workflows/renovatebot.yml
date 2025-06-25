@@ -32,7 +32,7 @@ jobs:
           RENOVATE_PLATFORM: "github"
           RENOVATE_AUTODISCOVER: "true"
           RENOVATE_ALLOW_PLUGINS: "true"
-          LOG_LEVEL: "INFO"
+          LOG_LEVEL: "DEBUG"
           RENOVATE_DRY_RUN: "null"  #set to "full" for dryrun and "null" to apply
           RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/*']" 
           RENOVATE_REQUIRE_CONFIG: "ignored"
