@@ -6,7 +6,7 @@ Please use separate GitHub Apps for public vs private repositories.
 
 # Testing locally
 
-If you wanna test renovatebot locally, you can the follow the following steps:
+If you wanna test renovatebot locally, you can follow these steps:
 
 - clone the repo you wanna test for
 - cd into the local repo folder
