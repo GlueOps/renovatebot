@@ -1,5 +1,5 @@
 # https://github.com/renovatebot/github-action?tab=readme-ov-file#example-with-github-app
-name: Renovate
+name: Renovate AutoMerge
 on:
   schedule:
     # The "*" (#42, asterisk) character has special semantics in YAML, so this
@@ -37,5 +37,5 @@ jobs:
           RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/*']" 
           RENOVATE_AUTODISCOVER_TOPICS: "['allow-auto-merge']"
           RENOVATE_REQUIRE_CONFIG: "ignored"
-          RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"extends": ["github>GlueOps/renovatebot-configs//auto-merge#v0.0.10"]}'
+          RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"extends": ["github>GlueOps/renovatebot-configs//base#v0.0.11","github>GlueOps/renovatebot-configs//auto-merge#v0.0.11"]}'
           RENOVATE_IGNORE_PR_AUTHOR: "true"
