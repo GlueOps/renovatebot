@@ -1,10 +1,10 @@
 # https://github.com/renovatebot/github-action?tab=readme-ov-file#example-with-github-app
 name: Renovate
 on:
-  # schedule:
-  #   # The "*" (#42, asterisk) character has special semantics in YAML, so this
-  #   # string has to be quoted.
-  #   - cron: '0/15 * * * *'
+  schedule:
+    # The "*" (#42, asterisk) character has special semantics in YAML, so this
+    # string has to be quoted.
+    - cron: '0 0 */2 * *'
   workflow_dispatch:
 jobs:
   renovate:
@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
-      - name: Self-hosted Renovate
+      - name: Self-hosted Renovate for automerge
         uses: renovatebot/github-action@e3c9b63dabe11d616d9a5e9c19064ec6560369c0 # v43.0.6
         with:
           token: '${{ steps.get_token.outputs.token }}'
@@ -35,10 +35,7 @@ jobs:
           LOG_LEVEL: "DEBUG"
           RENOVATE_DRY_RUN: "null"  #set to "full" for dryrun and "null" to apply
           RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/*']" 
+          RENOVATE_AUTODISCOVER_TOPICS: "['allow-auto-merge']"
           RENOVATE_REQUIRE_CONFIG: "ignored"
-          RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"extends": ["github>GlueOps/renovatebot-configs//defaults#v0.0.10"]}'
+          RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"extends": ["github>GlueOps/renovatebot-configs//auto-merge#v0.0.10"]}'
           RENOVATE_IGNORE_PR_AUTHOR: "true"
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          

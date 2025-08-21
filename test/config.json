@@ -1,22 +1,29 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "customManagers": [
-
+  "repositories": [
+    "GlueOps/cluster-information-help-page-html"
+  ],
+  "branchConcurrentLimit": 50,
+  "prConcurrentLimit": 50,
+  "prHourlyLimit": 0,
+  "recreateWhen": "always",
+  "customManagers": [],
+  "commitMessage": "{{#if isPatch}}chore(patch): update {{depName}} to v{{newVersion}}{{/if}}{#if isPin}}chore(pin): update {{depName}} to v{{newDigestShort}}{{/if}}{{#if isLockfileUpdate}}chore(lockfile): update {{depName}}-lockfile {{/if}}{{#if isPinDigest}}chore(pinDigest): update {{depName}} to v{{newDigestShort}}{{/if}}{{#if isMinor}}feat: update {{depName}} to v{{newVersion}}{{/if}}{{#if isMajor}}BREAKING: The dependency `{{depName}}` has been updated to a new major version (v{{newVersion}}), which may include breaking changes.{{/if}}",
+  "lockFileMaintenance": { "enabled": true },
+  "packageRules": [
     {
-      "customType": "regex",
-      "managerFilePatterns": ["/.*\\.md/","/.*\\.tf/"],
-      "matchStrings": [
-        ".*# renovate: eksAddonsFilter=(?<packageName>.*?)\n.*?[a-zA-Z0-9-_:]*[ ]*?[:|=][ ]*?[\"|']?(?<currentValue>[a-zA-Z0-9-_.]+)[\"|']?.*"
+      "description": "Automerge non-major updates",
+      "matchUpdateTypes": [
+        "patch",
+        "digest",
+        "pin",
+        "pinDigest",
+        "bump"
       ],
-      "datasourceTemplate": "aws-eks-addon",
-      "versioningTemplate": "aws-eks-addon" 
+      "automerge": true
     }
   ],
-  "packageRules": [
-
-     {
-      "matchDatasources": ["aws-eks-addon"],
-      "overrideDepName": "{{replace '.*\"addonName\":\"([^\"]+)\".*' '$1' depName}}"
-    }
+  "extends": [
+    ":semanticCommits"
   ]
 }
