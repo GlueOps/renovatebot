@@ -15,3 +15,8 @@ docker run --rm -it \
   -e AWS_ACCESS_KEY_ID \
   -e AWS_SECRET_ACCESS_KEY \
   renovate/renovate --require-config=ignored
+
+
+# for test github
+  # -e RENOVATE_TOKEN="" \
+  # -e RENOVATE_PLATFORM="github" 
