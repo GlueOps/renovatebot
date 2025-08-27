@@ -1,11 +1,10 @@
 # https://github.com/renovatebot/github-action?tab=readme-ov-file#example-with-github-app
 name: Renovate
 on:
-  # schedule:
-  #   # The "*" (#42, asterisk) character has special semantics in YAML, so this
-  #   # string has to be quoted.
-  #   - cron: '0/15 * * * *'
-  workflow_dispatch:
+  schedule:
+    # The "*" (#42, asterisk) character has special semantics in YAML, so this
+    # string has to be quoted.
+    - cron: '0/15 * * * *'
 jobs:
   renovate:
     runs-on: ubuntu-latest
