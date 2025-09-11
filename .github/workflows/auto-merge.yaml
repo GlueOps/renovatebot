@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Self-hosted Renovate for automerge
-        uses: renovatebot/github-action@e3c9b63dabe11d616d9a5e9c19064ec6560369c0 # v43.0.6
+        uses: renovatebot/github-action@6927a58a017ee9ac468a34a5b0d2a9a9bd45cac3 # v43.0.11
         with:
           token: '${{ steps.get_token.outputs.token }}'
           env-regex: "^(?:RENOVATE_\\w+|LOG_LEVEL|AWS_SECRET_ACCESS_KEY|AWS_ACCESS_KEY_ID|AWS_REGION)$"
