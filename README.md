@@ -9,7 +9,7 @@ Please use separate GitHub Apps for public vs private repositories.
 If you wanna test renovatebot locally, you can follow these steps:
 
 - clone the repo you wanna test for
-- cd into the local repo folder
+- cd into the local repo foldersss
 - copy the test folder content  to the current directory: 
     cp ../renovatebot/test/* .
 - (Optional) if you're testing for aws replace the creds inside `script.sh`
