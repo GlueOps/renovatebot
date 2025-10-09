@@ -8,6 +8,9 @@ on:
 jobs:
   renovate:
     runs-on: ubuntu-latest
+    concurrency:
+      group: renovatebot
+      cancel-in-progress: false
     steps:
       - name: Get token
         id: get_token
