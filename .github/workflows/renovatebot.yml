@@ -38,7 +38,7 @@ jobs:
           RENOVATE_ALLOW_PLUGINS: "true"
           LOG_LEVEL: "DEBUG"
           RENOVATE_DRY_RUN: "null"  #set to "full" for dryrun and "null" to apply
-          RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/*']" 
+          RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/go-healthz']" 
           RENOVATE_REQUIRE_CONFIG: "ignored"
           RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"extends": ["github>GlueOps/renovatebot-configs//base#v0.0.24", "github>GlueOps/renovatebot-configs//defaults#v0.0.24"]}'
           RENOVATE_IGNORE_PR_AUTHOR: "true"
