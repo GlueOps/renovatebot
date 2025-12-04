@@ -34,7 +34,7 @@ jobs:
       - name: Set matrix output
         id: set-matrix
         run: |
-          echo "repo-list=$(cat repos.json)" >> "$GITHUB_OUTPUT"
+          echo "repo-list=$(jq -c . repos.json)" >> "$GITHUB_OUTPUT"
 
   renovatebot:
     needs: get-repos
