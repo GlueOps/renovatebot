@@ -6,13 +6,46 @@ on:
     # string has to be quoted.
     - cron: '0/15 * * * *'
   workflow_dispatch:
-  
+
+permissions:
+  contents: read
+  #metadata: read
+  # Uncomment below for private GlueOps repos:
+  # read:org: read
+
 jobs:
-  renovate-standard:
+  get-repos:
     runs-on: ubuntu-latest
+    outputs:
+      repo-list: ${{ steps.set-matrix.outputs.repo-list }}
+    steps:
+      - name: Install jq (if not preinstalled)
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Get GlueOps repos via GitHub CLI
+        id: get_repos
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Get all public (and private if token allows) repos, filter for not archived and not forks
+          gh api orgs/GlueOps/repos --paginate --jq '.[] | select(.archived==false and (.fork|not)) | .name' > repos.txt
+          jq -Rs 'split("\n") | map(select(length > 0))' repos.txt > repos.json
+
+      - name: Set matrix output
+        id: set-matrix
+        run: |
+          echo "repo-list=$(cat repos.json)" >> "$GITHUB_OUTPUT"
+
+  renovatebot:
+    needs: get-repos
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        repo: ${{ fromJson(needs.get-repos.outputs.repo-list) }}
     concurrency:
-      group: renovatebot
+      group: renovatebot-${{ matrix.repo }}
       cancel-in-progress: false
+
     steps:
       - name: Get token
         id: get_token
@@ -24,8 +57,6 @@ jobs:
           app-id: ${{ secrets.app_id }}
           owner: ${{ github.repository_owner }}
 
-      - name: Checkout
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
 
       - name: Self-hosted Renovate (no automerge)
         uses: renovatebot/github-action@03026bd55840025343414baec5d9337c5f9c7ea7 # v44.0.4
@@ -38,7 +69,7 @@ jobs:
           RENOVATE_ALLOW_PLUGINS: "true"
           LOG_LEVEL: "DEBUG"
           RENOVATE_DRY_RUN: "null"  #set to "full" for dryrun and "null" to apply
-          RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/*']" 
+          RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/${{ matrix.repo }}']" 
           RENOVATE_REQUIRE_CONFIG: "ignored"
           RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"forkProcessing":"enabled","extends": ["github>GlueOps/renovatebot-configs//base#v0.0.26", "github>GlueOps/renovatebot-configs//defaults#v0.0.26"]}'
           RENOVATE_IGNORE_PR_AUTHOR: "true"
@@ -57,7 +88,7 @@ jobs:
           RENOVATE_ALLOW_PLUGINS: "true"
           LOG_LEVEL: "DEBUG"
           RENOVATE_DRY_RUN: "null"  #set to "full" for dryrun and "null" to apply
-          RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/*']" 
+          RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/${{ matrix.repo }}']" 
           RENOVATE_AUTODISCOVER_TOPICS: "['allow-auto-merge']"
           RENOVATE_REQUIRE_CONFIG: "ignored"
           RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"forkProcessing":"enabled","extends": ["github>GlueOps/renovatebot-configs//base#v0.0.26","github>GlueOps/renovatebot-configs//auto-merge#v0.0.26"]}'
