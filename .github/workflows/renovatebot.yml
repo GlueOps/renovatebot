@@ -51,7 +51,7 @@ jobs:
     steps:
       - name: Get token
         id: get_token
-        uses: actions/create-github-app-token@7e473efe3cb98aa54f8d4bac15400b15fad77d94 # v2
+        uses: actions/create-github-app-token@29824e69f54612133e76f7eaac726eef6c875baf # v2
         with: 
             # App being used: https://github.com/enterprises/glueops/settings/apps/public-glueops-renovatebot
             # App Permissions: https://docs.renovatebot.com/modules/platform/github/#running-as-a-github-app
