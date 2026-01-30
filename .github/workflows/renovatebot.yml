@@ -27,8 +27,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Get all public (and private if token allows) repos, filter for not archived and not forks
-          gh api orgs/GlueOps/repos --paginate --jq '.[] | select(.archived==false and (.fork|not)) | .name' > repos.txt
+          # Get all public (and private if token allows) repos, filter for not archived
+          gh api orgs/GlueOps/repos --paginate --jq '.[] | select(.archived==false) | .name' > repos.txt
           jq -Rs 'split("\n") | map(select(length > 0))' repos.txt > repos.json
 
       - name: Set matrix output
