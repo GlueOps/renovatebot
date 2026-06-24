@@ -2,16 +2,11 @@
 name: Renovate
 on:
   schedule:
-    # The "*" (#42, asterisk) character has special semantics in YAML, so this
-    # string has to be quoted.
     - cron: '0/15 * * * *'
   workflow_dispatch:
 
 permissions:
   contents: read
-  #metadata: read
-  # Uncomment below for private GlueOps repos:
-  # read:org: read
 
 jobs:
   get-repos:
@@ -30,7 +25,7 @@ jobs:
           app-id: ${{ secrets.app_id }}
           owner: ${{ github.repository_owner }}
 
-      - name: Get GlueOps repos via GitHub CLI
+      - name: Get Organizaiton repos via GitHub CLI
         id: get_repos
         env:
           GH_TOKEN: ${{ steps.get_token.outputs.token }}
