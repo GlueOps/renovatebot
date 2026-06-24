@@ -22,13 +22,21 @@ jobs:
       - name: Install jq (if not preinstalled)
         run: sudo apt-get update && sudo apt-get install -y jq
 
+      - name: Get token
+        id: get_token
+        uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3
+        with:
+          private-key: ${{ secrets.private_key }}
+          app-id: ${{ secrets.app_id }}
+          owner: ${{ github.repository_owner }}
+
       - name: Get GlueOps repos via GitHub CLI
         id: get_repos
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ steps.get_token.outputs.token }}
         run: |
-          # Get all public (and private if token allows) repos, filter for not archived
-          gh api orgs/GlueOps/repos --paginate --jq '.[] | select(.archived==false) | .name' > repos.txt
+          gh api installation/repositories --paginate \
+            --jq '.repositories[] | select(.archived==false) | .name' > repos.txt
           jq -Rs 'split("\n") | map(select(length > 0))' repos.txt > repos.json
 
       - name: Set matrix output
