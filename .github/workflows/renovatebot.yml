@@ -59,7 +59,7 @@ jobs:
             # App being used is either PUBLIC or PRIVATE renovatebot: https://github.com/enterprises/glueops/settings/apps
             # App Permissions: https://docs.renovatebot.com/modules/platform/github/#running-as-a-github-app
           private-key: ${{ secrets.private_key }}
-          app-id: ${{ secrets.app_id }}
+          client-id: ${{ secrets.app_id }}
           owner: ${{ github.repository_owner }}
 
 
