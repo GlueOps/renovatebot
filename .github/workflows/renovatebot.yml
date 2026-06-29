@@ -76,6 +76,7 @@ jobs:
           RENOVATE_DRY_RUN: "null"  #set to "full" for dryrun and "null" to apply
           RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/${{ matrix.repo }}']" 
           RENOVATE_REQUIRE_CONFIG: "optional"
+          RENOVATE_ONBOARDING: "false"
           RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"forkProcessing":"enabled","extends": ["github>GlueOps/renovatebot-configs//base#v0.0.33", "github>GlueOps/renovatebot-configs//defaults#v0.0.33"]}'
           RENOVATE_IGNORE_PR_AUTHOR: "true"
           AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -96,5 +97,6 @@ jobs:
           RENOVATE_AUTODISCOVER_FILTER: "['${{ github.repository_owner }}/${{ matrix.repo }}']" 
           RENOVATE_AUTODISCOVER_TOPICS: "['allow-auto-merge']"
           RENOVATE_REQUIRE_CONFIG: "optional"
+          RENOVATE_ONBOARDING: "false"
           RENOVATE_FORCE: '{"force": {"schedule": ["at any time"]},"prConcurrentLimit": 0,"prHourlyLimit": 0,"forkProcessing":"enabled","extends": ["github>GlueOps/renovatebot-configs//base#v0.0.33","github>GlueOps/renovatebot-configs//auto-merge#v0.0.33"]}'
           RENOVATE_IGNORE_PR_AUTHOR: "true"
