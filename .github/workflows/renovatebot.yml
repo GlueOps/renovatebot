@@ -64,7 +64,7 @@ jobs:
 
 
       - name: Self-hosted Renovate (no automerge)
-        uses: renovatebot/github-action@e09d604f8f803bb527bd8321ed5be06c460b8682 # v46.2.2
+        uses: renovatebot/github-action@5402b206248e5a8c8427a15102702eb9c1793efc # v46.2.4
         with:
           token: '${{ steps.get_token.outputs.token }}'
           env-regex: "^(?:RENOVATE_\\w+|LOG_LEVEL|AWS_SECRET_ACCESS_KEY|AWS_ACCESS_KEY_ID|AWS_REGION)$"
@@ -84,7 +84,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Self-hosted Renovate (auto-merge)
-        uses: renovatebot/github-action@e09d604f8f803bb527bd8321ed5be06c460b8682 # v46.2.2
+        uses: renovatebot/github-action@5402b206248e5a8c8427a15102702eb9c1793efc # v46.2.4
         with:
           token: '${{ steps.get_token.outputs.token }}'
           env-regex: "^(?:RENOVATE_\\w+|LOG_LEVEL|AWS_SECRET_ACCESS_KEY|AWS_ACCESS_KEY_ID|AWS_REGION)$"
